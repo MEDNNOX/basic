@@ -20,5 +20,9 @@ df['sepal_length'].astype(int) 10
 df['sepal_length'] = df['sepal_length'].astype(int) 11
 df 
 
-df['species'].replace({"species":0,"virginica":1},inplace=True) 12
+df['species'] = df['species'].replace({
+    "setosa":0,
+    "versicolor":1,
+    "virginica":2
+})
 df
