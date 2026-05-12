@@ -2,66 +2,66 @@
 
 
 import numpy as np
-import pandas as pd
+import pandas as pd 1.
 
-df = pd.read_csv("Student.csv")
-df
+df = pd.read_csv("Student.csv") 2.
+df 3.
 
-df.head()
+df.head() 4.
 
-df.tail()
+df.tail()  5.
 
-df.describe()
+df.describe() 6.
 
-df.info()
+df.info() 7.
 
-df.shape
+df.shape 8.
 
-df.isnull().any().any()
+df.isnull().any().any() 9.
 
-df.isnull().sum()
+df.isnull().sum() 10.
 
-avg_val = df["Discussion"].astype("float").mean()
-avg_val
+avg_val = df["Discussion"].astype("float").mean()  11.
+avg_val 
 
-df["Discussion"] = df["Discussion"].replace(np.nan, avg_val)
+df["Discussion"] = df["Discussion"].replace(np.nan, avg_val) 12.
 
-df.isnull().sum()
+df.isnull().sum() 13.
 
 import seaborn as sns
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 14.
 from scipy import stats
 
 sns.regplot(x='Sno', y='AnnouncementsView', data=df)
+plt.show() 15.
+
+sns.boxplot(x=df['AnnouncementsView']) 16.
 plt.show()
 
-sns.boxplot(x=df['AnnouncementsView'])
-plt.show()
-
-z = np.abs(stats.zscore(df['AnnouncementsView']))
+z = np.abs(stats.zscore(df['AnnouncementsView'])) 17. 
 print(z)
 
-threshold = 3
-print(np.where(z > 3))
+threshold = 3 18.
+print(np.where(z > 3)) 19.
 
-z[419]
+z[419]  20.
 
-df1 = pd.DataFrame({ 'Income': [15000, 1800, 120000, 10000],
+df1 = pd.DataFrame({ 'Income': [15000, 1800, 120000, 10000], 
 'Age': [25, 18, 42, 51],
-'Department': ['HR','Legal','Marketing','Management']})
+'Department': ['HR','Legal','Marketing','Management']}) 21.
 
 df1
 
-df1_scaled = df1.copy()
+df1_scaled = df1.copy() 22.
 col_names = ['Income', 'Age']
-features = df1_scaled[col_names]
+features = df1_scaled[col_names] 23.
 
 features
 
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.preprocessing import MinMaxScaler 24.
 scaler = MinMaxScaler()
-df1_scaled[col_names] = scaler.fit_transform(features.values)
+df1_scaled[col_names] = scaler.fit_transform(features.values) 25.
 
-print(df1_scaled[col_names])
+print(df1_scaled[col_names]) 26.
 
 
