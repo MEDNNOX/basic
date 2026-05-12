@@ -3,70 +3,70 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
+import warnings 1
+warnings.filterwarnings('ignore') 2 
 
-data = pd.read_csv('https://raw.githubusercontent.com/dphi-official/Datasets/master/titanic_data.csv')
-data.head()
+data = pd.read_csv('https://raw.githubusercontent.com/dphi-official/Datasets/master/titanic_data.csv') 3
+data.head() 4 
 
-data.shape
+data.shape 5
 
-data.describe()
+data.describe() 6
 
-data.describe(include = 'object')
+data.describe(include = 'object') 7
 
-data.isnull().sum()
+data.isnull().sum() 8
 
-data['Age'] = data['Age'].fillna(np.mean(data['Age']))
+data['Age'] = data['Age'].fillna(np.mean(data['Age'])) 9
 
-data['Cabin'] = data['Cabin'].fillna(data['Cabin'].mode()[0])
+data['Cabin'] = data['Cabin'].fillna(data['Cabin'].mode()[0]) 10
 
-data['Embarked'] = data['Embarked'].fillna(data['Embarked'].mode()[0])
+data['Embarked'] = data['Embarked'].fillna(data['Embarked'].mode()[0]) 11
 
-data.isnull().sum()
+data.isnull().sum() 12 
 
-sns.countplot(x='Survived',data=data)
+sns.countplot(x='Survived',data=data) 13 
 
-sns.countplot(x='Pclass',data=data)
+sns.countplot(x='Pclass',data=data) 14
 
-sns.countplot(x='Embarked',data=data)
+sns.countplot(x='Embarked',data=data) 15
 
-sns.countplot(x='Sex',data=data)
+sns.countplot(x='Sex',data=data) 16
 
-sns.boxplot(data['Age'])
+sns.boxplot(data['Age']) 17
 
-sns.boxplot(data['Fare'])
+sns.boxplot(data['Fare']) 18
 
-sns.boxplot(data['Pclass'])
+sns.boxplot(data['Pclass']) 19
 
-sns.boxplot(data['SibSp'])
+sns.boxplot(data['SibSp']) 20
 
-sns.catplot(x= 'Pclass', y = 'Age', data=data, kind = 'box')
+sns.catplot(x= 'Pclass', y = 'Age', data=data, kind = 'box') 21
 
-sns.catplot(x= 'Pclass', y = 'Fare', data=data, kind = 'strip')
+sns.catplot(x= 'Pclass', y = 'Fare', data=data, kind = 'strip') 22
 
-sns.catplot(x= 'Sex', y = 'Fare', data=data, kind = 'strip')
+sns.catplot(x= 'Sex', y = 'Fare', data=data, kind = 'strip') 23
 
-sns.catplot(x= 'Sex', y = 'Age', data=data, kind = 'strip')
+sns.catplot(x= 'Sex', y = 'Age', data=data, kind = 'strip') 24
 
-sns.pairplot(data)
+sns.pairplot(data) 25
 
-sns.scatterplot(x = 'Fare', y = 'Pclass', hue = 'Survived', data = data)
+sns.scatterplot(x = 'Fare', y = 'Pclass', hue = 'Survived', data = data) 26
 
-sns.scatterplot(x = 'Survived', y = 'Fare', data = data)
+sns.scatterplot(x = 'Survived', y = 'Fare', data = data) 27
 
-sns.distplot(data['Age'])
+sns.distplot(data['Age']) 28
 
-sns.distplot(data['Fare'])
+sns.distplot(data['Fare']) 29
 
-sns.jointplot(x = "Survived", y = "Fare", kind = "scatter", data = data)
+sns.jointplot(x = "Survived", y = "Fare", kind = "scatter", data = data) 30
 
-tc = data.corr()
+tc = data.corr() 31
 sns.heatmap(tc, cmap="YlGnBu")
-plt.title('Correlation')
+plt.title('Correlation') 32
 
-sns.catplot(x='Pclass', y='Fare', data=data, kind='bar')
+sns.catplot(x='Pclass', y='Fare', data=data, kind='bar') 33
 
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 34
 
-plt.hist(data['Fare'])
+plt.hist(data['Fare']) 35
