@@ -1,58 +1,58 @@
 
-pip install --upgrade numexpr
+pip install --upgrade numexpr 1
 
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-%matplotlib inline
+%matplotlib inline 2
 
-Boston = pd.read_csv("house_dataset.csv")
-Boston.head()
+Boston = pd.read_csv("house_dataset.csv") 3
+Boston.head() 4 
 
-Boston.info()
+Boston.info() 5
 
-Boston.describe()
+Boston.describe() 6
 
-Boston.plot.scatter('RM','MEDV',figsize = (6,6))
+Boston.plot.scatter('RM','MEDV',figsize = (6,6)) 7
 
-plt.subplots(figsize=(12,8))
-sns.heatmap(Boston.corr(), cmap = 'RdGy', annot = True, fmt = '.1f') 
+plt.subplots(figsize=(12,8)) 8
+sns.heatmap(Boston.corr(), cmap = 'RdGy', annot = True, fmt = '.1f') 9
             
-X = Boston[['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX','PTRATIO','BLACK','LSTAT']]
-Y = Boston['MEDV']
+X = Boston[['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX','PTRATIO','BLACK','LSTAT']] 
+Y = Boston['MEDV'] 10
 
 from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
+from sklearn.linear_model import LinearRegression 11
 
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3,random_state=0)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3,random_state=0) 12
 
 print(f'Train Dataset Size - X: {X_train.shape}, Y: {Y_train.shape}')
-print(f'Test Dataset Size - X: {X_test.shape}, Y: {Y_test.shape}')
+print(f'Test Dataset Size - X: {X_test.shape}, Y: {Y_test.shape}') 13
 
-lm = LinearRegression()
-lm.fit(X_train,Y_train)
-predictions = lm.predict(X_test)
+lm = LinearRegression() 14 
+lm.fit(X_train,Y_train) 16
+predictions = lm.predict(X_test) 17
 
 plt.figure(figsize=(6, 6))
 plt.scatter(Y_test, predictions)
 plt.xlabel('Y Test')
 plt.ylabel('Predicted Y')
 plt.title('Test vs Prediction')
-plt.figure(figsize=(6, 6))
+plt.figure(figsize=(6, 6)) 18 
 
 
 plt.scatter(X_test['RM'], Y_test, marker = '+')
 plt.xlabel('Average number of rooms per dwelling')
 plt.ylabel('Median value of owner-occupied homes')
-plt.title('Regression Line Tracing')
+plt.title('Regression Line Tracing') 19 
 
-from sklearn import metrics
-print('Mean Absolute Error:', metrics.mean_absolute_error(Y_test, predictions))
-print('Mean Square Error:', metrics.mean_squared_error(Y_test, predictions))
-print('Root Mean Square Error:', np.sqrt(metrics.mean_squared_error(Y_test, predictions)))
+from sklearn import metrics 20 
+print('Mean Absolute Error:', metrics.mean_absolute_error(Y_test, predictions)) 21 
+print('Mean Square Error:', metrics.mean_squared_error(Y_test, predictions)) 22
+print('Root Mean Square Error:', np.sqrt(metrics.mean_squared_error(Y_test, predictions)))  23
 
 coefficients = pd.DataFrame(lm.coef_.round(2), X.columns)
 coefficients.columns = ['coefficients']
-coefficients
+coefficients 24 
