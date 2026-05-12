@@ -1,76 +1,76 @@
 
 import numpy as np
 import pandas as pd
-import statistics as st
+import statistics as st 1
 
-df = pd.read_csv("Mall_Customers.csv")
-df
+df = pd.read_csv("Mall_Customers.csv") 2
+df 3
 
-df.mean(numeric_only=True)
+df.mean(numeric_only=True) 4
 
-df.loc[:,'Age'].mean() 
+df.loc[:,'Age'].mean() 5
 
-df.mean(axis=1, numeric_only=True)
+df.mean(axis=1, numeric_only=True) 6
 
-df.median(numeric_only=True)
+df.median(numeric_only=True) 7
 
-df.loc[:,'Age'].median()
+df.loc[:,'Age'].median() 8
+ 
+df.median(axis=1, numeric_only=True) 9
 
-df.median(axis=1, numeric_only=True)
+df.mode(numeric_only=True) 10
 
-df.mode(numeric_only=True)
+df.loc[:,'Age'].mode() 11
 
-df.loc[:,'Age'].mode()
+df.min(numeric_only=True) 12
 
-df.min(numeric_only=True)
+df.loc[:,'Age'].min(skipna = False) 13
 
-df.loc[:,'Age'].min(skipna = False)
+df.max() 14
 
-df.max()
+df.loc[:,'Age'].max(skipna = False) 15
 
-df.loc[:,'Age'].max(skipna = False)
+df.std(numeric_only=True) 16
 
-df.std(numeric_only=True) 
+df.loc[:,'Age'].std() 17
 
-df.loc[:,'Age'].std() 
+df.std(axis=1,numeric_only=True) 18
 
-df.std(axis=1,numeric_only=True)
+df.groupby(['Gender'])['Age'].mean()  19
 
-df.groupby(['Gender'])['Age'].mean() 
+df_u=df.rename(columns= {'Annual Income (k$)':'Income'}, inplace= False) 20
 
-df_u=df.rename(columns= {'Annual Income (k$)':'Income'}, inplace= False)
+df_u 21
 
-df_u
+df_u.groupby(['Gender']).Income.mean() 22
 
-df_u.groupby(['Gender']).Income.mean()
+from sklearn import preprocessing 23
+enc = preprocessing.OneHotEncoder() 24
+enc_df = pd.DataFrame(enc.fit_transform(df[['Gender']]).toarray()) 25
+enc_df 26
 
-from sklearn import preprocessing
-enc = preprocessing.OneHotEncoder()
-enc_df = pd.DataFrame(enc.fit_transform(df[['Gender']]).toarray())
-enc_df
+df_encode =df_u.join(enc_df) 27
+df_encode 28
 
-df_encode =df_u.join(enc_df)
-df_encode
-
-import pandas as pd
+import pandas as pd 
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 29
 
-df_iris = pd.read_csv("Iris.csv")
+df_iris = pd.read_csv("Iris.csv") 30
 
-df_iris.head()
+df_iris.head() 31
 
 print('Iris-setosa')
 setosa = df_iris['species'] == 'Iris-setosa'
-print(df_iris[setosa].describe())
+print(df_iris[setosa].describe()) 32
 print('\nIris-versicolor')
 versicolor = df_iris['species'] == 'Iris-versicolor'
-print(df_iris[versicolor].describe())
+print(df_iris[versicolor].describe()) 33
 print('\nIris-virginica')
 virginica = df_iris['species'] == 'Iris-virginica'
-print(df_iris[virginica].describe())
+print(df_iris[virginica].describe()) 34
 
-df_iris.dtypes.value_counts()
+df_iris.dtypes.value_counts() 35
 
 
 
