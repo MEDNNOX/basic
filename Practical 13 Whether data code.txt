@@ -1,0 +1,24 @@
+import scala.io.Source
+
+val data = Source.fromFile("Whether.txt")
+  .getLines()
+  .toList()
+
+var tempSum = 0.0
+var dewSum = 0.0
+var windSum = 0.0
+var count = 0
+
+for (line <- data) {
+  val values = line.split(" ")
+
+  tempSum += values(0).toDouble
+  dewSum += values(1).toDouble
+  windSum += values(2).toDouble
+
+  count += 1
+}
+
+println("avg temperature: " + tempSum / count)
+println("avg dew point: " + dewSum / count)
+println("avg wind speed: " + windSum / count)

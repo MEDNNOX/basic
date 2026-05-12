@@ -1,0 +1,22 @@
+import scala.io.Source
+
+val counts = Source.fromFile("log.txt")
+  .getLines()
+  .flatMap(_.split(" "))
+  .map(word => {
+    if (word.startsWith("INFO")) "INFO"
+    else if (word.startsWith("ERROR")) "ERROR"
+    else if (word.startsWith("WARN")) "WARN"
+    else "OTHER"
+  })
+
+
+ .filter(_ != "OTHER")
+  .toList
+  .groupBy(word => word)
+  .map { case (word, list) => (word, list.size) }
+
+
+counts.foreach { case (k, v) =>
+  println(s"($k, $v)")
+}

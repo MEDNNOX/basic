@@ -1,0 +1,58 @@
+
+pip install --upgrade numexpr
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+
+Boston = pd.read_csv("house_dataset.csv")
+Boston.head()
+
+Boston.info()
+
+Boston.describe()
+
+Boston.plot.scatter('RM','MEDV',figsize = (6,6))
+
+plt.subplots(figsize=(12,8))
+sns.heatmap(Boston.corr(), cmap = 'RdGy', annot = True, fmt = '.1f') 
+            
+X = Boston[['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX','PTRATIO','BLACK','LSTAT']]
+Y = Boston['MEDV']
+
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3,random_state=0)
+
+print(f'Train Dataset Size - X: {X_train.shape}, Y: {Y_train.shape}')
+print(f'Test Dataset Size - X: {X_test.shape}, Y: {Y_test.shape}')
+
+lm = LinearRegression()
+lm.fit(X_train,Y_train)
+predictions = lm.predict(X_test)
+
+plt.figure(figsize=(6, 6))
+plt.scatter(Y_test, predictions)
+plt.xlabel('Y Test')
+plt.ylabel('Predicted Y')
+plt.title('Test vs Prediction')
+plt.figure(figsize=(6, 6))
+
+
+plt.scatter(X_test['RM'], Y_test, marker = '+')
+plt.xlabel('Average number of rooms per dwelling')
+plt.ylabel('Median value of owner-occupied homes')
+plt.title('Regression Line Tracing')
+
+from sklearn import metrics
+print('Mean Absolute Error:', metrics.mean_absolute_error(Y_test, predictions))
+print('Mean Square Error:', metrics.mean_squared_error(Y_test, predictions))
+print('Root Mean Square Error:', np.sqrt(metrics.mean_squared_error(Y_test, predictions)))
+
+coefficients = pd.DataFrame(lm.coef_.round(2), X.columns)
+coefficients.columns = ['coefficients']
+coefficients

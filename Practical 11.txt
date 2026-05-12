@@ -1,0 +1,14 @@
+import scala.io.Source
+import scala.util.Using
+
+val counts = Using(Source.fromFile("/home/student/Downloads/log.txt")) { file =>
+  file.getLines()
+    .toList
+    .flatMap(_.split(" "))
+    .groupBy(identity)
+    .view
+    .mapValues(_.size)
+    .toMap
+}.get
+
+counts.foreach(println)

@@ -1,0 +1,77 @@
+
+import numpy as np
+import pandas as pd
+import statistics as st
+
+df = pd.read_csv("Mall_Customers.csv")
+df
+
+df.mean(numeric_only=True)
+
+df.loc[:,'Age'].mean() 
+
+df.mean(axis=1, numeric_only=True)
+
+df.median(numeric_only=True)
+
+df.loc[:,'Age'].median()
+
+df.median(axis=1, numeric_only=True)
+
+df.mode(numeric_only=True)
+
+df.loc[:,'Age'].mode()
+
+df.min(numeric_only=True)
+
+df.loc[:,'Age'].min(skipna = False)
+
+df.max()
+
+df.loc[:,'Age'].max(skipna = False)
+
+df.std(numeric_only=True) 
+
+df.loc[:,'Age'].std() 
+
+df.std(axis=1,numeric_only=True)
+
+df.groupby(['Gender'])['Age'].mean() 
+
+df_u=df.rename(columns= {'Annual Income (k$)':'Income'}, inplace= False)
+
+df_u
+
+df_u.groupby(['Gender']).Income.mean()
+
+from sklearn import preprocessing
+enc = preprocessing.OneHotEncoder()
+enc_df = pd.DataFrame(enc.fit_transform(df[['Gender']]).toarray())
+enc_df
+
+df_encode =df_u.join(enc_df)
+df_encode
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df_iris = pd.read_csv("Iris.csv")
+
+df_iris.head()
+
+print('Iris-setosa')
+setosa = df_iris['species'] == 'Iris-setosa'
+print(df_iris[setosa].describe())
+print('\nIris-versicolor')
+versicolor = df_iris['species'] == 'Iris-versicolor'
+print(df_iris[versicolor].describe())
+print('\nIris-virginica')
+virginica = df_iris['species'] == 'Iris-virginica'
+print(df_iris[virginica].describe())
+
+df_iris.dtypes.value_counts()
+
+
+
+

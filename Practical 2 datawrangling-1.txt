@@ -1,0 +1,67 @@
+// Practical 2 Data wrangling II  student dataset
+
+
+import numpy as np
+import pandas as pd
+
+df = pd.read_csv("Student.csv")
+df
+
+df.head()
+
+df.tail()
+
+df.describe()
+
+df.info()
+
+df.shape
+
+df.isnull().any().any()
+
+df.isnull().sum()
+
+avg_val = df["Discussion"].astype("float").mean()
+avg_val
+
+df["Discussion"] = df["Discussion"].replace(np.nan, avg_val)
+
+df.isnull().sum()
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+from scipy import stats
+
+sns.regplot(x='Sno', y='AnnouncementsView', data=df)
+plt.show()
+
+sns.boxplot(x=df['AnnouncementsView'])
+plt.show()
+
+z = np.abs(stats.zscore(df['AnnouncementsView']))
+print(z)
+
+threshold = 3
+print(np.where(z > 3))
+
+z[419]
+
+df1 = pd.DataFrame({ 'Income': [15000, 1800, 120000, 10000],
+'Age': [25, 18, 42, 51],
+'Department': ['HR','Legal','Marketing','Management']})
+
+df1
+
+df1_scaled = df1.copy()
+col_names = ['Income', 'Age']
+features = df1_scaled[col_names]
+
+features
+
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+df1_scaled[col_names] = scaler.fit_transform(features.values)
+
+print(df1_scaled[col_names])
+
+
