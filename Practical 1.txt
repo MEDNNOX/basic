@@ -1,24 +1,24 @@
-import pandas as pd
+import pandas as pd 1
 
-df = pd.read_csv("iris.csv")
-df
+df = pd.read_csv("iris.csv") 2
+df 3
 
-df.isnull()
+df.isnull()  4
 
-df.isnull().sum()
+df.isnull().sum() 5
 
-df.describe()
+df.describe() 6
 
-df.size
+df.size 7
 
-df.ndim
+df.ndim 8
 
-df.info()
+df.info() 9
 
-df['sepal_length'].astype(int)
+df['sepal_length'].astype(int) 10
 
-df['sepal_length'] = df['sepal_length'].astype(int)
-df
+df['sepal_length'] = df['sepal_length'].astype(int) 11
+df 
 
-df['species'].replace({"species":0,"virginica":1},inplace=True)
+df['species'].replace({"species":0,"virginica":1},inplace=True) 12
 df
