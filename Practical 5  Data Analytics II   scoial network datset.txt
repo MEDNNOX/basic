@@ -2,88 +2,88 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-import seaborn as sns
+import seaborn as sns 1
 
-df = pd.read_csv('prac5.csv')
-df.head()
+df = pd.read_csv('prac5.csv') 2
+df.head() 3
 
-df.info()
+df.info() 4 
 
-df.describe()
+df.describe() 5
 
 X = df[['Age', 'EstimatedSalary']]
-Y = df['Purchased']
+Y = df['Purchased'] 6 
 
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state=0)
-sc_X = StandardScaler()
-X_train = sc_X.fit_transform(X_train)
-X_test = sc_X.transform(X_test)
+from sklearn.preprocessing import StandardScaler 7 (are both )
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 0.25, random_state=0) 8
+sc_X = StandardScaler() 9 
+X_train = sc_X.fit_transform(X_train) 10 
+X_test = sc_X.transform(X_test) 11 ( can be both )
 print(f'Train Dataset Size - X: {X_train.shape}, Y: {Y_train.shape}')
-print(f'Test Dataset Size - X: {X_test.shape}, Y: {Y_test.shape}')
+print(f'Test Dataset Size - X: {X_test.shape}, Y: {Y_test.shape}') 13 
 
-from sklearn.linear_model import LogisticRegression
-lm = LogisticRegression(random_state = 0, solver='lbfgs' )
-lm.fit(X_train, Y_train)
-predictions = lm.predict(X_test)
+from sklearn.linear_model import LogisticRegression 14 
+lm = LogisticRegression(random_state = 0, solver='lbfgs' ) 15
+lm.fit(X_train, Y_train) 16
+predictions = lm.predict(X_test) 17
 plt.figure(figsize=(6, 6))
 sns.regplot(x = X_test[:, 1], y = predictions, scatter_kws={'s':5})
 plt.scatter(X_test[:, 1], Y_test, marker = '+')
 plt.xlabel("User's Estimated Salary")
 plt.ylabel('Ads Purchased')
-plt.title('Regression Line Tracing')
+plt.title('Regression Line Tracing') 18
 
 from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
-cm = confusion_matrix(Y_test, predictions)
+from sklearn.metrics import classification_report 19
+cm = confusion_matrix(Y_test, predictions) 20
 print(f'''Confusion matrix :\n
 | Positive Prediction\t| Negative Prediction
 ---------------+------------------------+----------------------
 Positive Class | True Positive (TP) {cm[0, 0]}\t| False Negative (FN) {cm[0, 1]}
 ---------------+------------------------+----------------------
-Negative Class | False Positive (FP) {cm[1, 0]}\t| True Negative (TN) {cm[1, 1]}\n''')
+Negative Class | False Positive (FP) {cm[1, 0]}\t| True Negative (TN) {cm[1, 1]}\n''') 21
 cr = classification_report(Y_test, predictions)
-print('Classification report : \n', cr)
+print('Classification report : \n', cr) 22
 
 
 
 # Visualizing the Training set results
-from matplotlib.colors import ListedColormap
-X_set, y_set = X_train, Y_train
+from matplotlib.colors import ListedColormap 23
+X_set, y_set = X_train, Y_train 24
 X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 1, stop = X_set[:, 0].max() + 1, step = 0.01),
 np.arange(start = X_set[:, 1].min() - 1, stop = X_set[:, 1].max() + 1, step = 0.01))
-plt.figure(figsize=(9, 7.5))
+plt.figure(figsize=(9, 7.5)) 25
 plt.contourf(X1, X2, lm.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-alpha = 0.6, cmap = ListedColormap(('red', 'green')))
+alpha = 0.6, cmap = ListedColormap(('red', 'green'))) 26
 plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(), X2.max())
+plt.ylim(X2.min(), X2.max()) 27
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
-    color = ListedColormap(('red', 'green'))(i), label = j)
+    color = ListedColormap(('red', 'green'))(i), label = j) 28
 plt.title('Logistic Regression (Training set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
-plt.show()
+plt.show() 29
 
 
 #Visualizing the Test set results
 from matplotlib.colors import ListedColormap
-X_set, y_set = X_test, Y_test
+X_set, y_set = X_test, Y_test 30
 X1, X2 = np.meshgrid(np.arange(start = X_set[:, 0].min() - 1, stop = X_set[:, 0].max() + 1, step = 0.01),
-np.arange(start = X_set[:, 1].min() - 1, stop = X_set[:, 1].max() + 1, step = 0.01))
+np.arange(start = X_set[:, 1].min() - 1, stop = X_set[:, 1].max() + 1, step = 0.01)) 31
 plt.figure(figsize=(9, 7.5))
 plt.contourf(X1, X2, lm.predict(np.array([X1.ravel(), X2.ravel()]).T).reshape(X1.shape),
-alpha = 0.6, cmap = ListedColormap(('red', 'green')))
+alpha = 0.6, cmap = ListedColormap(('red', 'green'))) 32
 plt.xlim(X1.min(), X1.max())
-plt.ylim(X2.min(),X2.max())
+plt.ylim(X2.min(),X2.max()) 33
 for i, j in enumerate(np.unique(y_set)):
     plt.scatter(X_set[y_set == j, 0], X_set[y_set == j, 1],
-    c = ListedColormap(('red', 'green'))(i), label = j)
+    c = ListedColormap(('red', 'green'))(i), label = j) 34 
 plt.title('Logistic Regression (Test set)')
 plt.xlabel('Age')
 plt.ylabel('Estimated Salary')
 plt.legend()
-plt.show()
+plt.show() 35
 
